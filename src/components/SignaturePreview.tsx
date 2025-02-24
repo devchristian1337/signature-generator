@@ -6,7 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import html2canvas from "html2canvas";
 
 export const SignaturePreview = () => {
-  const { name, title, company, font, color, size, alignment } = useSignature();
+  const { name, font, color, size, alignment, isBold, isItalic } = useSignature();
   const { toast } = useToast();
 
   const copyToClipboard = async () => {
@@ -63,21 +63,20 @@ export const SignaturePreview = () => {
         }}
       >
         <div
-          className={`space-y-1 ${font.class}`}
-          style={{ color, fontSize: size }}
+          className={`${font.class}`}
+          style={{
+            color,
+            fontSize: size,
+            fontWeight: isBold ? "bold" : "normal",
+            fontStyle: isItalic ? "italic" : "normal",
+          }}
         >
-          <div className="font-semibold">{name || "Your Name"}</div>
-          {title && <div>{title}</div>}
-          {company && <div>{company}</div>}
+          <div>{name || "Your Name"}</div>
         </div>
       </div>
 
       <div className="flex gap-4 justify-end">
-        <Button
-          variant="outline"
-          onClick={copyToClipboard}
-          className="gap-2"
-        >
+        <Button variant="outline" onClick={copyToClipboard} className="gap-2">
           <Copy className="w-4 h-4" />
           Copy
         </Button>
