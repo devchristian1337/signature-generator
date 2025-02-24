@@ -1,9 +1,15 @@
 
 import { useSignature } from "@/hooks/useSignature";
 import { Button } from "@/components/ui/button";
-import { Copy, Download, ImageOff } from "lucide-react";
+import { Copy, Download } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import html2canvas from "html2canvas";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const SignaturePreview = () => {
   const { name, font, color, size, isBold, isItalic } = useSignature();
@@ -15,7 +21,7 @@ export const SignaturePreview = () => {
 
     try {
       const canvas = await html2canvas(signatureElement, {
-        scale: 4, // Increase scale for better quality
+        scale: 4,
         useCORS: true,
         logging: false,
         backgroundColor: null,
@@ -60,7 +66,7 @@ export const SignaturePreview = () => {
 
       const canvas = await html2canvas(signatureElement, {
         backgroundColor: transparent ? null : '#ffffff',
-        scale: 4, // Increase scale for better quality
+        scale: 4,
         useCORS: true,
         logging: false,
         allowTaint: true,
@@ -77,7 +83,7 @@ export const SignaturePreview = () => {
       
       const link = document.createElement("a");
       link.download = `signature${transparent ? '-transparent' : ''}.png`;
-      link.href = canvas.toDataURL('image/png', 1.0); // Maximum quality
+      link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
       
       toast({
@@ -131,19 +137,24 @@ export const SignaturePreview = () => {
           <Copy className="w-4 h-4" />
           Copy
         </Button>
-        <Button 
-          variant="outline" 
-          onClick={() => downloadSignature(true)} 
-          className="gap-2"
-        >
-          <ImageOff className="w-4 h-4" />
-          Download Transparent
-        </Button>
-        <Button onClick={() => downloadSignature(false)} className="gap-2">
-          <Download className="w-4 h-4" />
-          Download
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="gap-2">
+              <Download className="w-4 h-4" />
+              Download
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-[200px]">
+            <DropdownMenuItem onClick={() => downloadSignature(false)}>
+              With Background
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => downloadSignature(true)}>
+              Transparent Background
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );
 };
+
