@@ -147,7 +147,7 @@ export const SignaturePreview = () => {
         fontStyle: isItalic ? "italic" : "normal",
         textRendering: 'optimizeLegibility'
       }}>
-          <div>{name || "Your Name"}</div>
+          <div className="select-none">{name || "Your Name"}</div>
         </div>
       </div>
 
