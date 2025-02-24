@@ -34,7 +34,7 @@ export const StyleControls = () => {
       <div className="space-y-2">
         <label className="text-sm font-medium">Color</label>
         <ColorPicker
-          value={color}
+          value={color as `#${string}`}
           onValueChange={(value) => setColor(value.hex)}
         >
           <Button
