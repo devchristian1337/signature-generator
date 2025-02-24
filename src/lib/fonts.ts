@@ -1,4 +1,3 @@
-
 export const fonts = [
   {
     name: "Dancing Script",

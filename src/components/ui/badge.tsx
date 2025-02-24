@@ -32,5 +32,5 @@ function Badge({ className, variant, ...props }: BadgeProps) {
   );
 }
 
-// Only export the Badge component since badgeVariants is not used elsewhere
 export { Badge };
+export type { BadgeProps };

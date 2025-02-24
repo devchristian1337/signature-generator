@@ -1,4 +1,3 @@
-
 import { Slider } from "@/components/ui/slider";
 import { Bold, Italic } from "lucide-react";
 import { Button } from "@/components/ui/button";
