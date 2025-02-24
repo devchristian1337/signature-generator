@@ -14,7 +14,13 @@ export const SignaturePreview = () => {
     if (!signatureElement) return;
 
     try {
-      const canvas = await html2canvas(signatureElement);
+      const canvas = await html2canvas(signatureElement, {
+        scale: 4, // Increase scale for better quality
+        useCORS: true,
+        logging: false,
+        backgroundColor: null,
+        imageTimeout: 0,
+      });
       canvas.toBlob(async (blob) => {
         if (!blob) return;
         await navigator.clipboard.write([
@@ -54,6 +60,11 @@ export const SignaturePreview = () => {
 
       const canvas = await html2canvas(signatureElement, {
         backgroundColor: transparent ? null : '#ffffff',
+        scale: 4, // Increase scale for better quality
+        useCORS: true,
+        logging: false,
+        allowTaint: true,
+        imageTimeout: 0,
         removeContainer: true,
       });
       
@@ -66,7 +77,7 @@ export const SignaturePreview = () => {
       
       const link = document.createElement("a");
       link.download = `signature${transparent ? '-transparent' : ''}.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.href = canvas.toDataURL('image/png', 1.0); // Maximum quality
       link.click();
       
       toast({
@@ -96,14 +107,19 @@ export const SignaturePreview = () => {
       <div
         id="signature-preview"
         className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200 flex items-center justify-center"
+        style={{
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+        }}
       >
         <div
           className={`${font.class} text-center`}
           style={{
             color,
-            fontSize: size,
+            fontSize: `${size}px`,
             fontWeight: isBold ? "bold" : "normal",
             fontStyle: isItalic ? "italic" : "normal",
+            textRendering: 'optimizeLegibility',
           }}
         >
           <div>{name || "Your Name"}</div>
