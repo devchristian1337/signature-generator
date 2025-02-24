@@ -5,10 +5,20 @@ import { Copy, Download } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import html2canvas from "html2canvas";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import confetti from 'canvas-confetti';
 
 export const SignaturePreview = () => {
   const { name, font, color, size, isBold, isItalic } = useSignature();
   const { toast } = useToast();
+
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#26ccff', '#a25afd', '#ff5e7e', '#88ff5a', '#fcff42', '#ffd426']
+    });
+  };
 
   const copyToClipboard = async (transparent: boolean = false) => {
     const signatureElement = document.getElementById("signature-preview");
@@ -54,6 +64,7 @@ export const SignaturePreview = () => {
           title: "Success",
           description: "Signature copied to clipboard",
         });
+        triggerConfetti();
       });
     } catch (error) {
       if (transparent) {
@@ -114,6 +125,7 @@ export const SignaturePreview = () => {
         title: "Success",
         description: "Signature downloaded successfully",
       });
+      triggerConfetti();
     } catch (error) {
       if (transparent) {
         containerElement.style.backgroundColor = originalContainerBg;
