@@ -1,7 +1,6 @@
-
 import { useSignature } from "@/hooks/useSignature";
 import { Button } from "@/components/ui/button";
-import { Copy, Download } from "lucide-react";
+import { Copy, Download, ImageOff } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import html2canvas from "html2canvas";
 
@@ -34,16 +33,24 @@ export const SignaturePreview = () => {
     }
   };
 
-  const downloadSignature = async () => {
+  const downloadSignature = async (transparent: boolean = false) => {
     const signatureElement = document.getElementById("signature-preview");
     if (!signatureElement) return;
 
     try {
-      const canvas = await html2canvas(signatureElement);
+      const canvas = await html2canvas(signatureElement, {
+        backgroundColor: transparent ? null : '#ffffff',
+      });
+      
       const link = document.createElement("a");
-      link.download = "signature.png";
-      link.href = canvas.toDataURL();
+      link.download = `signature${transparent ? '-transparent' : ''}.png`;
+      link.href = canvas.toDataURL('image/png');
       link.click();
+      
+      toast({
+        title: "Success",
+        description: "Signature downloaded successfully",
+      });
     } catch (error) {
       toast({
         title: "Error",
@@ -77,7 +84,15 @@ export const SignaturePreview = () => {
           <Copy className="w-4 h-4" />
           Copy
         </Button>
-        <Button onClick={downloadSignature} className="gap-2">
+        <Button 
+          variant="outline" 
+          onClick={() => downloadSignature(true)} 
+          className="gap-2"
+        >
+          <ImageOff className="w-4 h-4" />
+          Download Transparent
+        </Button>
+        <Button onClick={() => downloadSignature(false)} className="gap-2">
           <Download className="w-4 h-4" />
           Download
         </Button>
