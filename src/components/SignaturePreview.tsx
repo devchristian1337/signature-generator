@@ -41,11 +41,15 @@ export const SignaturePreview = () => {
 
     const originalContainerBg = containerElement.style.backgroundColor;
     const originalPreviewBg = signatureElement.style.backgroundColor;
+    const originalContainerBorder = containerElement.style.border;
+    const originalPreviewBorder = signatureElement.style.border;
 
     try {
       if (transparent) {
         containerElement.style.backgroundColor = 'transparent';
         signatureElement.style.backgroundColor = 'transparent';
+        containerElement.style.border = 'none';
+        signatureElement.style.border = 'none';
       }
 
       const canvas = await html2canvas(signatureElement, {
@@ -56,6 +60,8 @@ export const SignaturePreview = () => {
       if (transparent) {
         containerElement.style.backgroundColor = originalContainerBg;
         signatureElement.style.backgroundColor = originalPreviewBg;
+        containerElement.style.border = originalContainerBorder;
+        signatureElement.style.border = originalPreviewBorder;
       }
       
       const link = document.createElement("a");
@@ -71,6 +77,8 @@ export const SignaturePreview = () => {
       if (transparent) {
         containerElement.style.backgroundColor = originalContainerBg;
         signatureElement.style.backgroundColor = originalPreviewBg;
+        containerElement.style.border = originalContainerBorder;
+        signatureElement.style.border = originalPreviewBorder;
       }
       toast({
         title: "Error",
