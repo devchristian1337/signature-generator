@@ -3,6 +3,7 @@ import { Slider } from "@/components/ui/slider";
 import { Bold, Italic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSignature } from "@/hooks/useSignature";
+import { ColorPicker } from "@/components/ui/color-picker";
 
 export const StyleControls = () => {
   const {
@@ -32,12 +33,22 @@ export const StyleControls = () => {
 
       <div className="space-y-2">
         <label className="text-sm font-medium">Color</label>
-        <input
-          type="color"
+        <ColorPicker
           value={color}
-          onChange={(e) => setColor(e.target.value)}
-          className="w-full h-10 rounded-md cursor-pointer"
-        />
+          onValueChange={(value) => setColor(value.hex)}
+        >
+          <Button
+            variant="outline"
+            className="w-full justify-between"
+            style={{ color }}
+          >
+            <span>Pick a color</span>
+            <div
+              className="h-4 w-4 rounded-full border border-gray-200"
+              style={{ backgroundColor: color }}
+            />
+          </Button>
+        </ColorPicker>
       </div>
 
       <div className="space-y-2">
