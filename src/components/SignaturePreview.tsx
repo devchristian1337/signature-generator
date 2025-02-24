@@ -139,7 +139,7 @@ export const SignaturePreview = () => {
       <div id="signature-preview" style={{
       WebkitFontSmoothing: 'antialiased',
       MozOsxFontSmoothing: 'grayscale'
-    }} className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200 flex items-center justify-center select none">
+    }} className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200 flex items-center justify-center">
         <div className={`${font.class} text-center`} style={{
         color,
         fontSize: `${size}px`,
