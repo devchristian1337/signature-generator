@@ -1,6 +1,6 @@
 
 import { Slider } from "@/components/ui/slider";
-import { AlignLeft, AlignCenter, AlignRight, Bold, Italic } from "lucide-react";
+import { Bold, Italic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSignature } from "@/hooks/useSignature";
 
@@ -8,12 +8,10 @@ export const StyleControls = () => {
   const {
     size,
     color,
-    alignment,
     isBold,
     isItalic,
     setSize,
     setColor,
-    setAlignment,
     setIsBold,
     setIsItalic,
   } = useSignature();
@@ -58,33 +56,6 @@ export const StyleControls = () => {
             onClick={() => setIsItalic(!isItalic)}
           >
             <Italic className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <label className="text-sm font-medium">Alignment</label>
-        <div className="flex gap-2">
-          <Button
-            variant={alignment === "left" ? "default" : "outline"}
-            size="icon"
-            onClick={() => setAlignment("left")}
-          >
-            <AlignLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            variant={alignment === "center" ? "default" : "outline"}
-            size="icon"
-            onClick={() => setAlignment("center")}
-          >
-            <AlignCenter className="h-4 w-4" />
-          </Button>
-          <Button
-            variant={alignment === "right" ? "default" : "outline"}
-            size="icon"
-            onClick={() => setAlignment("right")}
-          >
-            <AlignRight className="h-4 w-4" />
           </Button>
         </div>
       </div>

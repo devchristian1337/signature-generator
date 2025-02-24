@@ -6,7 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import html2canvas from "html2canvas";
 
 export const SignaturePreview = () => {
-  const { name, font, color, size, alignment, isBold, isItalic } = useSignature();
+  const { name, font, color, size, isBold, isItalic } = useSignature();
   const { toast } = useToast();
 
   const copyToClipboard = async () => {
@@ -58,12 +58,9 @@ export const SignaturePreview = () => {
       <div
         id="signature-preview"
         className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200 flex items-center justify-center"
-        style={{
-          textAlign: alignment,
-        }}
       >
         <div
-          className={`${font.class}`}
+          className={`${font.class} text-center`}
           style={{
             color,
             fontSize: size,
