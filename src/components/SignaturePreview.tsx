@@ -36,21 +36,26 @@ export const SignaturePreview = () => {
 
   const downloadSignature = async (transparent: boolean = false) => {
     const signatureElement = document.getElementById("signature-preview");
-    if (!signatureElement) return;
+    const containerElement = document.getElementById("signature-container");
+    if (!signatureElement || !containerElement) return;
+
+    const originalContainerBg = containerElement.style.backgroundColor;
+    const originalPreviewBg = signatureElement.style.backgroundColor;
 
     try {
-      // Temporarily remove background for transparent download
       if (transparent) {
+        containerElement.style.backgroundColor = 'transparent';
         signatureElement.style.backgroundColor = 'transparent';
       }
 
       const canvas = await html2canvas(signatureElement, {
         backgroundColor: transparent ? null : '#ffffff',
+        removeContainer: true,
       });
       
-      // Restore background
       if (transparent) {
-        signatureElement.style.backgroundColor = 'white';
+        containerElement.style.backgroundColor = originalContainerBg;
+        signatureElement.style.backgroundColor = originalPreviewBg;
       }
       
       const link = document.createElement("a");
@@ -63,12 +68,9 @@ export const SignaturePreview = () => {
         description: "Signature downloaded successfully",
       });
     } catch (error) {
-      // Restore background in case of error
       if (transparent) {
-        const signatureElement = document.getElementById("signature-preview");
-        if (signatureElement) {
-          signatureElement.style.backgroundColor = 'white';
-        }
+        containerElement.style.backgroundColor = originalContainerBg;
+        signatureElement.style.backgroundColor = originalPreviewBg;
       }
       toast({
         title: "Error",
@@ -79,7 +81,10 @@ export const SignaturePreview = () => {
   };
 
   return (
-    <div className="space-y-6 w-full p-6 bg-white/50 backdrop-blur-sm rounded-lg border border-gray-200 animate-fadeIn">
+    <div 
+      id="signature-container"
+      className="space-y-6 w-full p-6 bg-white/50 backdrop-blur-sm rounded-lg border border-gray-200 animate-fadeIn"
+    >
       <div
         id="signature-preview"
         className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200 flex items-center justify-center"
