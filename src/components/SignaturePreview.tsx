@@ -1,3 +1,4 @@
+
 import { useSignature } from "@/hooks/useSignature";
 import { Button } from "@/components/ui/button";
 import { Copy, Download, ImageOff } from "lucide-react";
@@ -38,9 +39,19 @@ export const SignaturePreview = () => {
     if (!signatureElement) return;
 
     try {
+      // Temporarily remove background for transparent download
+      if (transparent) {
+        signatureElement.style.backgroundColor = 'transparent';
+      }
+
       const canvas = await html2canvas(signatureElement, {
         backgroundColor: transparent ? null : '#ffffff',
       });
+      
+      // Restore background
+      if (transparent) {
+        signatureElement.style.backgroundColor = 'white';
+      }
       
       const link = document.createElement("a");
       link.download = `signature${transparent ? '-transparent' : ''}.png`;
@@ -52,6 +63,13 @@ export const SignaturePreview = () => {
         description: "Signature downloaded successfully",
       });
     } catch (error) {
+      // Restore background in case of error
+      if (transparent) {
+        const signatureElement = document.getElementById("signature-preview");
+        if (signatureElement) {
+          signatureElement.style.backgroundColor = 'white';
+        }
+      }
       toast({
         title: "Error",
         description: "Failed to download signature",
