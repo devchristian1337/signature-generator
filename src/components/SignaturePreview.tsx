@@ -57,7 +57,7 @@ export const SignaturePreview = () => {
     <div className="space-y-6 w-full p-6 bg-white/50 backdrop-blur-sm rounded-lg border border-gray-200 animate-fadeIn">
       <div
         id="signature-preview"
-        className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200"
+        className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200 flex items-center justify-center"
         style={{
           textAlign: alignment,
         }}
