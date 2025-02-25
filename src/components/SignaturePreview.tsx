@@ -1,6 +1,6 @@
 import { useSignature } from "@/hooks/useSignature";
 import { Button } from "@/components/ui/button";
-import { Copy, Download } from "lucide-react";
+import { Copy, Download, Share2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import html2canvas from "html2canvas";
 import {
@@ -8,11 +8,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import confetti from "canvas-confetti";
 
 export const SignaturePreview = () => {
-  const { name, font, color, size, isBold, isItalic } = useSignature();
+  const { name, font, color, size, isBold, isItalic, angle, background } =
+    useSignature();
   const { toast } = useToast();
 
   const triggerConfetti = () => {
@@ -47,7 +49,11 @@ export const SignaturePreview = () => {
         signatureElement.style.border = "none";
       }
       const canvas = await html2canvas(signatureElement, {
-        backgroundColor: transparent ? null : "#ffffff",
+        backgroundColor: transparent
+          ? null
+          : background.enabled
+          ? background.color
+          : "#ffffff",
         scale: 4,
         useCORS: true,
         logging: false,
@@ -105,7 +111,11 @@ export const SignaturePreview = () => {
         signatureElement.style.border = "none";
       }
       const canvas = await html2canvas(signatureElement, {
-        backgroundColor: transparent ? null : "#ffffff",
+        backgroundColor: transparent
+          ? null
+          : background.enabled
+          ? background.color
+          : "#ffffff",
         scale: 4,
         useCORS: true,
         logging: false,
@@ -143,6 +153,57 @@ export const SignaturePreview = () => {
     }
   };
 
+  const shareSignature = async () => {
+    try {
+      const signatureElement = document.getElementById("signature-preview");
+      if (!signatureElement) return;
+
+      const canvas = await html2canvas(signatureElement, {
+        backgroundColor: background.enabled ? background.color : "#ffffff",
+        scale: 4,
+      });
+
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+
+        if (navigator.share) {
+          const file = new File([blob], "signature.png", { type: "image/png" });
+
+          try {
+            await navigator.share({
+              title: "My Signature",
+              text: "Check out my signature created with the Signature Generator!",
+              files: [file],
+            });
+
+            toast({
+              title: "Success",
+              description: "Signature shared successfully",
+            });
+          } catch (error) {
+            toast({
+              title: "Error",
+              description: "Failed to share signature",
+              variant: "destructive",
+            });
+          }
+        } else {
+          toast({
+            title: "Not Supported",
+            description: "Web Share API is not supported in your browser",
+            variant: "destructive",
+          });
+        }
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to prepare signature for sharing",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div
       id="signature-container"
@@ -150,10 +211,11 @@ export const SignaturePreview = () => {
     >
       <div
         id="signature-preview"
-        className="min-h-[200px] p-6 bg-white rounded-md border border-gray-200 flex items-center justify-center"
+        className="min-h-[200px] p-6 rounded-md border border-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
         style={{
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
+          backgroundColor: background.enabled ? background.color : "#ffffff",
         }}
       >
         <div
@@ -164,6 +226,9 @@ export const SignaturePreview = () => {
             fontWeight: isBold ? "bold" : "normal",
             fontStyle: isItalic ? "italic" : "normal",
             textRendering: "optimizeLegibility",
+            transform: `rotate(${angle}deg)`,
+            transformOrigin: "center",
+            transition: "transform 0.3s ease-in-out",
           }}
         >
           <div className="select-none">{name || "Your Name"}</div>
@@ -178,15 +243,21 @@ export const SignaturePreview = () => {
               Copy
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[200px]">
+          <DropdownMenuContent
+            align="end"
+            className="w-[200px] custom-scrollbar"
+          >
             <DropdownMenuItem onClick={() => copyToClipboard(false)}>
-              With Background
+              {background.enabled
+                ? "With Current Background"
+                : "With White Background"}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => copyToClipboard(true)}>
-              Transparent Background
+              No Background (Transparent)
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="gap-2 w-full sm:w-auto">
@@ -194,15 +265,31 @@ export const SignaturePreview = () => {
               Download
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[200px]">
+          <DropdownMenuContent
+            align="end"
+            className="w-[200px] custom-scrollbar"
+          >
             <DropdownMenuItem onClick={() => downloadSignature(false)}>
-              With Background
+              {background.enabled
+                ? "With Current Background"
+                : "With White Background"}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => downloadSignature(true)}>
-              Transparent Background
+              No Background (Transparent)
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+
+        {typeof navigator !== "undefined" && "share" in navigator && (
+          <Button
+            variant="outline"
+            className="gap-2 w-full sm:w-auto"
+            onClick={shareSignature}
+          >
+            <Share2 className="w-4 h-4" />
+            Share
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -59,6 +59,19 @@ export default {
         playfair: ["Playfair Display", "serif"],
         cormorant: ["Cormorant", "serif"],
         dancing: ["Dancing Script", "cursive"],
+        pacifico: ["Pacifico", "cursive"],
+        "great-vibes": ["Great Vibes", "cursive"],
+        sacramento: ["Sacramento", "cursive"],
+        satisfy: ["Satisfy", "cursive"],
+        caveat: ["Caveat", "cursive"],
+        kalam: ["Kalam", "cursive"],
+        shadows: ["Shadows Into Light", "cursive"],
+        "mr-dafoe": ["Mr Dafoe", "cursive"],
+        "pinyon-script": ["Pinyon Script", "cursive"],
+        "marck-script": ["Marck Script", "cursive"],
+        "homemade-apple": ["Homemade Apple", "cursive"],
+        "reenie-beanie": ["Reenie Beanie", "cursive"],
+        "nothing-you-could-do": ["Nothing You Could Do", "cursive"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -91,5 +104,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
