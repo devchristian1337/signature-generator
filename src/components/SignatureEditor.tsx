@@ -23,16 +23,18 @@ export const SignatureEditor = () => {
   };
 
   return (
-    <div className="space-y-6 w-full p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm animate-fadeIn transition-all hover:shadow-md">
-      <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
-        <PenTool className="h-5 w-5 text-indigo-600" />
-        <h2 className="text-lg font-medium text-gray-800">Signature Details</h2>
+    <div className="space-y-6 w-full p-6 bg-white/70 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm animate-fadeIn transition-all hover:shadow-md">
+      <div className="flex items-center gap-2 pb-2 border-b border-gray-100 dark:border-gray-800">
+        <PenTool className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+        <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">
+          Signature Details
+        </h2>
       </div>
 
       <div className="space-y-2">
         <label
           htmlFor="full-name"
-          className="text-sm font-medium text-gray-700 flex items-center gap-1"
+          className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1"
         >
           Full Name
         </label>
@@ -41,16 +43,16 @@ export const SignatureEditor = () => {
           value={name}
           onChange={handleInputChange}
           placeholder="Enter your full name"
-          className="w-full transition-all border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+          className="w-full transition-all border-gray-300 dark:border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-800 dark:bg-gray-800 dark:text-white"
           aria-label="Full name for signature"
         />
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           This is how your name will appear in the signature
         </p>
       </div>
 
       <div className="space-y-2">
-        <span className="text-sm font-medium text-gray-700 flex items-center gap-1">
+        <span className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1">
           Choose Signature Font
         </span>
         <Select
@@ -58,17 +60,17 @@ export const SignatureEditor = () => {
           onValueChange={handleFontChange}
           aria-label="Select signature font"
         >
-          <SelectTrigger className="w-full transition-all border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200">
+          <SelectTrigger className="w-full transition-all border-gray-300 dark:border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-800 dark:bg-gray-800 dark:text-white">
             <SelectValue placeholder="Select a font" />
           </SelectTrigger>
-          <SelectContent className="max-h-[300px]">
+          <SelectContent className="max-h-[300px] dark:bg-gray-800 dark:border-gray-700">
             {fonts.map((fontOption) => (
               <SelectItem
                 key={fontOption.name}
                 value={fontOption.name}
-                className="flex flex-col items-start py-3 hover:bg-gray-50 transition-colors"
+                className="flex flex-col items-start py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
-                <span className="text-sm text-gray-700 mb-1 font-medium">
+                <span className="text-sm text-gray-700 dark:text-gray-300 mb-1 font-medium">
                   {fontOption.name}
                 </span>
                 <span
@@ -81,14 +83,14 @@ export const SignatureEditor = () => {
                 >
                   {name || "Your Name"}
                 </span>
-                <span className="text-xs text-gray-400 mt-1">
+                <span className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                   {fontOption.style}
                 </span>
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Select from a variety of handwriting styles for your personal
           signature
         </p>

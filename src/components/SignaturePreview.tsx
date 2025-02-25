@@ -207,17 +207,17 @@ export const SignaturePreview = () => {
   return (
     <div
       id="signature-container"
-      className="space-y-6 w-full p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm animate-fadeIn transition-all hover:shadow-md"
+      className="space-y-6 w-full p-6 bg-white/70 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm animate-fadeIn transition-all hover:shadow-md"
     >
-      <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+      <div className="flex items-center justify-between pb-2 border-b border-gray-100 dark:border-gray-800">
         <div className="flex items-center gap-2">
-          <Share2 className="h-5 w-5 text-indigo-600" />
-          <h2 className="text-lg font-medium text-gray-800">
+          <Share2 className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+          <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">
             Preview & Export
           </h2>
         </div>
         {name && (
-          <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium animate-pulse">
+          <span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 px-2 py-1 rounded-full font-medium animate-pulse">
             Ready to export
           </span>
         )}
@@ -225,7 +225,7 @@ export const SignaturePreview = () => {
 
       <div
         id="signature-preview"
-        className="min-h-[220px] p-8 rounded-md border border-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out shadow-inner overflow-hidden"
+        className="min-h-[220px] p-8 rounded-md border border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-300 ease-in-out shadow-inner overflow-hidden"
         style={{
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
@@ -250,7 +250,7 @@ export const SignaturePreview = () => {
       </div>
 
       <div className="space-y-4">
-        <div className="text-sm text-gray-500 flex items-center gap-2">
+        <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
           <Download className="h-4 w-4" />
           <span>Export your signature as an image</span>
         </div>
@@ -260,7 +260,7 @@ export const SignaturePreview = () => {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="gap-2 w-full sm:w-auto hover:bg-gray-50 transition-colors border-gray-300"
+                className="gap-2 w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-gray-300 dark:border-gray-700 dark:text-gray-300"
               >
                 <Copy className="w-4 h-4" />
                 Copy
@@ -268,18 +268,18 @@ export const SignaturePreview = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="w-[200px] custom-scrollbar"
+              className="w-[200px] custom-scrollbar dark:bg-gray-800 dark:border-gray-700"
             >
               <DropdownMenuItem
                 onClick={() => copyToClipboard(false)}
-                className="cursor-pointer hover:bg-gray-50"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
               >
                 Copy with background
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="dark:bg-gray-700" />
               <DropdownMenuItem
                 onClick={() => copyToClipboard(true)}
-                className="cursor-pointer hover:bg-gray-50"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
               >
                 Copy with transparent background
               </DropdownMenuItem>
@@ -290,7 +290,7 @@ export const SignaturePreview = () => {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="gap-2 w-full sm:w-auto hover:bg-gray-50 transition-colors border-gray-300"
+                className="gap-2 w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-gray-300 dark:border-gray-700 dark:text-gray-300"
               >
                 <Download className="w-4 h-4" />
                 Download
@@ -298,18 +298,18 @@ export const SignaturePreview = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              className="w-[240px] custom-scrollbar"
+              className="w-[240px] custom-scrollbar dark:bg-gray-800 dark:border-gray-700"
             >
               <DropdownMenuItem
                 onClick={() => downloadSignature(false)}
-                className="cursor-pointer hover:bg-gray-50"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
               >
                 Download with background
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="dark:bg-gray-700" />
               <DropdownMenuItem
                 onClick={() => downloadSignature(true)}
-                className="cursor-pointer hover:bg-gray-50"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
               >
                 Download with transparent background
               </DropdownMenuItem>
@@ -319,7 +319,7 @@ export const SignaturePreview = () => {
           {navigator.share && (
             <Button
               variant="default"
-              className="gap-2 w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 transition-colors"
+              className="gap-2 w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800 transition-colors"
               onClick={shareSignature}
             >
               <Share2 className="w-4 h-4" />
