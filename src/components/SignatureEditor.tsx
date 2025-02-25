@@ -8,42 +8,67 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { PenTool } from "lucide-react";
 
 export const SignatureEditor = () => {
   const { name, setName, font, setFont } = useSignature();
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleFontChange = (value: string) => {
+    const selectedFont = fonts.find((f) => f.name === value);
+    if (selectedFont) setFont(selectedFont);
+  };
+
   return (
-    <div className="space-y-6 w-full p-6 bg-white/50 backdrop-blur-sm rounded-lg border border-gray-200 animate-fadeIn">
-      <div className="space-y-2">
-        <label className="text-sm font-medium">Full Name</label>
-        <Input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter your full name"
-          className="w-full"
-        />
+    <div className="space-y-6 w-full p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm animate-fadeIn transition-all hover:shadow-md">
+      <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
+        <PenTool className="h-5 w-5 text-indigo-600" />
+        <h2 className="text-lg font-medium text-gray-800">Signature Details</h2>
       </div>
 
       <div className="space-y-2">
-        <span className="text-sm font-medium">Choose Signature Font</span>
+        <label
+          htmlFor="full-name"
+          className="text-sm font-medium text-gray-700 flex items-center gap-1"
+        >
+          Full Name
+        </label>
+        <Input
+          id="full-name"
+          value={name}
+          onChange={handleInputChange}
+          placeholder="Enter your full name"
+          className="w-full transition-all border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+          aria-label="Full name for signature"
+        />
+        <p className="text-xs text-gray-500 mt-1">
+          This is how your name will appear in the signature
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <span className="text-sm font-medium text-gray-700 flex items-center gap-1">
+          Choose Signature Font
+        </span>
         <Select
           value={font.name}
-          onValueChange={(value) => {
-            const selectedFont = fonts.find((f) => f.name === value);
-            if (selectedFont) setFont(selectedFont);
-          }}
+          onValueChange={handleFontChange}
+          aria-label="Select signature font"
         >
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full transition-all border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200">
             <SelectValue placeholder="Select a font" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="max-h-[300px]">
             {fonts.map((fontOption) => (
               <SelectItem
                 key={fontOption.name}
                 value={fontOption.name}
-                className="flex flex-col items-start py-3"
+                className="flex flex-col items-start py-3 hover:bg-gray-50 transition-colors"
               >
-                <span className="text-sm text-gray-600 mb-1">
+                <span className="text-sm text-gray-700 mb-1 font-medium">
                   {fontOption.name}
                 </span>
                 <span

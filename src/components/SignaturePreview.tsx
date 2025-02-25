@@ -207,11 +207,25 @@ export const SignaturePreview = () => {
   return (
     <div
       id="signature-container"
-      className="space-y-6 w-full p-6 bg-white/50 backdrop-blur-sm rounded-lg border border-gray-200 animate-fadeIn"
+      className="space-y-6 w-full p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm animate-fadeIn transition-all hover:shadow-md"
     >
+      <div className="flex items-center justify-between pb-2 border-b border-gray-100">
+        <div className="flex items-center gap-2">
+          <Share2 className="h-5 w-5 text-indigo-600" />
+          <h2 className="text-lg font-medium text-gray-800">
+            Preview & Export
+          </h2>
+        </div>
+        {name && (
+          <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium animate-pulse">
+            Ready to export
+          </span>
+        )}
+      </div>
+
       <div
         id="signature-preview"
-        className="min-h-[200px] p-6 rounded-md border border-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out"
+        className="min-h-[220px] p-8 rounded-md border border-gray-200 flex items-center justify-center transition-all duration-300 ease-in-out shadow-inner overflow-hidden"
         style={{
           WebkitFontSmoothing: "antialiased",
           MozOsxFontSmoothing: "grayscale",
@@ -219,7 +233,7 @@ export const SignaturePreview = () => {
         }}
       >
         <div
-          className={`${font.class} text-center`}
+          className={`${font.class} text-center relative`}
           style={{
             color,
             fontSize: `${size}px`,
@@ -228,68 +242,91 @@ export const SignaturePreview = () => {
             textRendering: "optimizeLegibility",
             transform: `rotate(${angle}deg)`,
             transformOrigin: "center",
-            transition: "transform 0.3s ease-in-out",
+            transition: "all 0.3s ease-in-out",
           }}
         >
           <div className="select-none">{name || "Your Name"}</div>
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 items-center sm:justify-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="gap-2 w-full sm:w-auto">
-              <Copy className="w-4 h-4" />
-              Copy
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="w-[200px] custom-scrollbar"
-          >
-            <DropdownMenuItem onClick={() => copyToClipboard(false)}>
-              {background.enabled
-                ? "With Current Background"
-                : "With White Background"}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => copyToClipboard(true)}>
-              No Background (Transparent)
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="space-y-4">
+        <div className="text-sm text-gray-500 flex items-center gap-2">
+          <Download className="h-4 w-4" />
+          <span>Export your signature as an image</span>
+        </div>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button className="gap-2 w-full sm:w-auto">
-              <Download className="w-4 h-4" />
-              Download
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="w-[200px] custom-scrollbar"
-          >
-            <DropdownMenuItem onClick={() => downloadSignature(false)}>
-              {background.enabled
-                ? "With Current Background"
-                : "With White Background"}
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => downloadSignature(true)}>
-              No Background (Transparent)
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex flex-col sm:flex-row gap-3 items-center">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="gap-2 w-full sm:w-auto hover:bg-gray-50 transition-colors border-gray-300"
+              >
+                <Copy className="w-4 h-4" />
+                Copy
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="w-[200px] custom-scrollbar"
+            >
+              <DropdownMenuItem
+                onClick={() => copyToClipboard(false)}
+                className="cursor-pointer hover:bg-gray-50"
+              >
+                Copy with background
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => copyToClipboard(true)}
+                className="cursor-pointer hover:bg-gray-50"
+              >
+                Copy with transparent background
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-        {typeof navigator !== "undefined" && "share" in navigator && (
-          <Button
-            variant="outline"
-            className="gap-2 w-full sm:w-auto"
-            onClick={shareSignature}
-          >
-            <Share2 className="w-4 h-4" />
-            Share
-          </Button>
-        )}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="gap-2 w-full sm:w-auto hover:bg-gray-50 transition-colors border-gray-300"
+              >
+                <Download className="w-4 h-4" />
+                Download
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="w-[240px] custom-scrollbar"
+            >
+              <DropdownMenuItem
+                onClick={() => downloadSignature(false)}
+                className="cursor-pointer hover:bg-gray-50"
+              >
+                Download with background
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => downloadSignature(true)}
+                className="cursor-pointer hover:bg-gray-50"
+              >
+                Download with transparent background
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {navigator.share && (
+            <Button
+              variant="default"
+              className="gap-2 w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 transition-colors"
+              onClick={shareSignature}
+            >
+              <Share2 className="w-4 h-4" />
+              Share
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
