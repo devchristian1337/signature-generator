@@ -23,7 +23,7 @@ A modern web application that allows users to create, customize, and export beau
 
 ## 🚀 Live Demo
 
-[Check out the live demo](https://signature-generator-mu.vercel.app/) (placeholder link - update with your actual demo URL)
+[Check out the live demo](https://signature-generator-mu.vercel.app/)
 
 ## 🛠️ Tech Stack
 
