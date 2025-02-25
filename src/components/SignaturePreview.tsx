@@ -217,7 +217,7 @@ export const SignaturePreview = () => {
           </h2>
         </div>
         {name && (
-          <span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 px-2 py-1 rounded-full font-medium animate-pulse">
+          <span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 px-2 py-1 rounded-full font-medium animate-pulse select-none">
             Ready to export
           </span>
         )}
@@ -252,7 +252,7 @@ export const SignaturePreview = () => {
       <div className="space-y-4">
         <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
           <Download className="h-4 w-4" />
-          <span>Export your signature as an image</span>
+          <span className="select-none">Export your signature as an image</span>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 items-center">
@@ -260,7 +260,7 @@ export const SignaturePreview = () => {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="gap-2 w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-gray-300 dark:border-gray-700 dark:text-gray-300"
+                className="gap-2 w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-gray-300 dark:border-gray-700 dark:text-gray-300 select-none"
               >
                 <Copy className="w-4 h-4" />
                 Copy
@@ -272,14 +272,14 @@ export const SignaturePreview = () => {
             >
               <DropdownMenuItem
                 onClick={() => copyToClipboard(false)}
-                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 select-none"
               >
                 Copy with background
               </DropdownMenuItem>
               <DropdownMenuSeparator className="dark:bg-gray-700" />
               <DropdownMenuItem
                 onClick={() => copyToClipboard(true)}
-                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 select-none"
               >
                 Copy with transparent background
               </DropdownMenuItem>
@@ -290,7 +290,7 @@ export const SignaturePreview = () => {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="gap-2 w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-gray-300 dark:border-gray-700 dark:text-gray-300"
+                className="gap-2 w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-gray-300 dark:border-gray-700 dark:text-gray-300 select-none"
               >
                 <Download className="w-4 h-4" />
                 Download
@@ -302,14 +302,14 @@ export const SignaturePreview = () => {
             >
               <DropdownMenuItem
                 onClick={() => downloadSignature(false)}
-                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 select-none"
               >
                 Download with background
               </DropdownMenuItem>
               <DropdownMenuSeparator className="dark:bg-gray-700" />
               <DropdownMenuItem
                 onClick={() => downloadSignature(true)}
-                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300"
+                className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-300 select-none"
               >
                 Download with transparent background
               </DropdownMenuItem>
@@ -319,7 +319,7 @@ export const SignaturePreview = () => {
           {navigator.share && (
             <Button
               variant="default"
-              className="gap-2 w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800 transition-colors"
+              className="gap-2 w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800 transition-colors select-none"
               onClick={shareSignature}
             >
               <Share2 className="w-4 h-4" />

@@ -6,6 +6,7 @@ import {
   Settings2,
   Palette,
   PaintBucket,
+  TriangleRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSignature } from "@/hooks/useSignature";
@@ -72,11 +73,11 @@ export const StyleControls = () => {
           aria-label="Adjust signature size"
         />
         <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-          <span>Small</span>
-          <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-full">
+          <span className="select-none">Small</span>
+          <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-full select-none">
             {size}px
           </span>
-          <span>Large</span>
+          <span className="select-none">Large</span>
         </div>
       </div>
 
@@ -98,7 +99,7 @@ export const StyleControls = () => {
             className="w-full justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-gray-300 dark:border-gray-700 dark:text-gray-300"
             aria-label="Choose text color"
           >
-            <span>Signature Color</span>
+            <span className="select-none">Signature Color</span>
             <div
               className="h-5 w-5 rounded-full border border-gray-200 dark:border-gray-600 shadow-sm"
               style={{ backgroundColor: color }}
@@ -142,7 +143,7 @@ export const StyleControls = () => {
             aria-pressed={isBold}
           >
             <Bold className="h-4 w-4" />
-            <span>Bold</span>
+            <span className="select-none">Bold</span>
           </Button>
           <Button
             variant="outline"
@@ -157,7 +158,7 @@ export const StyleControls = () => {
             aria-pressed={isItalic}
           >
             <Italic className="h-4 w-4" />
-            <span>Italic</span>
+            <span className="select-none">Italic</span>
           </Button>
         </div>
       </div>
@@ -167,19 +168,7 @@ export const StyleControls = () => {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <svg
-              className="h-4 w-4 text-indigo-600 dark:text-indigo-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
+            <TriangleRight className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
             <label
               htmlFor="angle-slider"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -211,11 +200,11 @@ export const StyleControls = () => {
           />
         </div>
         <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
-          <span>-45°</span>
-          <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-full">
+          <span className="select-none">-45°</span>
+          <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-800 rounded-full select-none">
             {angle}°
           </span>
-          <span>+45°</span>
+          <span className="select-none">+45°</span>
         </div>
       </div>
 
@@ -231,7 +220,7 @@ export const StyleControls = () => {
         <div className="flex items-center justify-between px-2 py-2 bg-gray-50 dark:bg-gray-800 rounded-md">
           <Label
             htmlFor="background-toggle"
-            className="text-sm text-gray-700 dark:text-gray-300 font-medium cursor-pointer"
+            className="text-sm text-gray-700 dark:text-gray-300 font-medium cursor-pointer select-none"
           >
             Enable Background
           </Label>

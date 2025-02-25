@@ -46,7 +46,7 @@ export const SignatureEditor = () => {
           className="w-full transition-all border-gray-300 dark:border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-800 dark:bg-gray-800 dark:text-white"
           aria-label="Full name for signature"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 select-none">
           This is how your name will appear in the signature
         </p>
       </div>
@@ -90,7 +90,7 @@ export const SignatureEditor = () => {
             ))}
           </SelectContent>
         </Select>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 select-none">
           Select from a variety of handwriting styles for your personal
           signature
         </p>
