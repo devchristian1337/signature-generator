@@ -165,39 +165,27 @@ export const StyleControls = () => {
       <Separator className="my-4" />
 
       <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <svg
-            className="h-4 w-4 text-indigo-600 dark:text-indigo-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          <label
-            htmlFor="angle-slider"
-            className="text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            Rotation
-          </label>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="flex-1">
-            <Slider
-              id="angle-slider"
-              value={[angle]}
-              onValueChange={handleAngleChange}
-              min={-45}
-              max={45}
-              step={1}
-              className="w-full"
-              aria-label="Adjust signature rotation"
-            />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <svg
+              className="h-4 w-4 text-indigo-600 dark:text-indigo-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            <label
+              htmlFor="angle-slider"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Rotation
+            </label>
           </div>
           <Button
             variant="outline"
@@ -205,10 +193,22 @@ export const StyleControls = () => {
             onClick={handleResetAngle}
             title="Reset rotation"
             aria-label="Reset rotation to default"
-            className="h-8 w-8 border-gray-300 dark:border-gray-700 dark:text-gray-300"
+            className="h-7 w-7 border-gray-300 dark:border-gray-700 dark:text-gray-300"
           >
-            <RotateCcw className="h-4 w-4" />
+            <RotateCcw className="h-3.5 w-3.5" />
           </Button>
+        </div>
+        <div>
+          <Slider
+            id="angle-slider"
+            value={[angle]}
+            onValueChange={handleAngleChange}
+            min={-45}
+            max={45}
+            step={1}
+            className="w-full"
+            aria-label="Adjust signature rotation"
+          />
         </div>
         <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
           <span>-45°</span>
