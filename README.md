@@ -1,6 +1,6 @@
 # Signature Generator
 
-![Preview](https://iili.io/3Hi4Sj9.png)
+![Preview](https://iili.io/3JkLZyQ.png)
 
 A modern web application that allows users to create, customize, and export beautiful handwritten signatures. Built with React 19, TypeScript, and Vite, this application offers a seamless user experience for generating professional-looking digital signatures.
 
